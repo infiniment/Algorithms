@@ -18,26 +18,27 @@ class Solution {
           3.1 한 번 실행한 프로세스는 다시 큐에 넣지 않고 그대로 종료됩니다.
         */
         while (!deque.isEmpty()) {
-            int[] current = deque.pollFirst(); // 맨 앞에 있는 프로세스 꺼내기
-            
-            boolean hasHigher = false;
+            int[] currentProcess = deque.pollFirst();
+            boolean isHigher = false;
             
             for (int[] process : deque) {
-                if (current[0] < process[0]) {
-                    hasHigher = true;
+                if (process[0] > currentProcess[0]) {
+                    isHigher = true;
                     break;
                 }
             }
             
-            if (hasHigher) {
-                deque.addLast(current);
+            if (isHigher) {
+                deque.addLast(currentProcess);
             } else {
                 answer++;
                 
-                if (current[1] == location) {
+                if (currentProcess[1] == location) {
                     return answer;
                 }
             }
+            
+            
         }
         
         
