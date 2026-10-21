@@ -1,22 +1,30 @@
-import java.util.Stack;
+import java.util.*;
 
 class Solution {
     boolean solution(String s) {
-        Stack<Character> stk = new Stack<>();
+        boolean answer = false;
         
-        char[] ch = s.toCharArray();
+        Stack<Character> stack = new Stack<>();
         
-        for(char c : ch) {
-            if(c == '(') // 열린 괄호이면 push
-                stk.push(c);
-            else {
-                if(stk.isEmpty() || stk.pop() == c) // 스택이 비어있거나 팝한 괄호가 c와 같을 때(열린 괄호)일 때는 false
-                    return false;
+        
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            
+            if (c == '(') {
+                stack.push(c);
+            } else if (c == ')') {
+                if (stack.isEmpty()) {
+                    return false;    
+                } else {
+                    stack.pop();
+                }
             }
         }
-
         
-
-        return stk.isEmpty(); // 스택이 비어있는지 확인 (비어 있으면 true, 비어 있지 않으면 false 반환)
+        if (!stack.isEmpty()) {
+            return false;
+        }
+        
+        return true;
     }
 }
